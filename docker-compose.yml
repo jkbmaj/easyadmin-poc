@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  ###> doctrine/doctrine-bundle ###
+  database:
+    image: biarms/mysql:5.7.30
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: db
+    volumes:
+      - database_data:/var/lib/mysql
+      - ./docker/database/init:/docker-entrypoint-initdb.d
+    ports:
+      - "13308:3306"
+###< doctrine/doctrine-bundle ###
+
+volumes:
+  database_data:

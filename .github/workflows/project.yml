@@ -1,0 +1,33 @@
+name: Communication and marketing PoC
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  project:
+    name: Project
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Install newest PHP 8.2 version
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Install Dependencies
+        run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
