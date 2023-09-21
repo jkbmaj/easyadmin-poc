@@ -29,7 +29,7 @@ EOT;
             ->setTitle('Example of active temaplate')
             ->setContent(self::TEMPLATE_CONTENT)
             ->setIsActive(true)
-            ->setCreatedBy($this->getReference(UserFixtures::class . 'admin', User::class));
+            ->setCreatedBy($this->getReference(UserFixtures::class.'admin', User::class));
 
         $manager->persist($newsletterTemplate);
 

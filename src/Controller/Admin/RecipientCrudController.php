@@ -4,9 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Recipient;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
 
 class RecipientCrudController extends AbstractCrudController
@@ -60,6 +60,6 @@ class RecipientCrudController extends AbstractCrudController
             ->add(TextFilter::new('email'))
             ->add(TextFilter::new('source'))
             ->add(TextFilter::new('ip'))
-            ;
+        ;
     }
 }

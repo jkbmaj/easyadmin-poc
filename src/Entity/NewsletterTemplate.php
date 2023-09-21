@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Stringable;
 use App\Repository\NewsletterTemplateRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,7 +11,7 @@ use Knp\DoctrineBehaviors\Contract\Entity\TimestampableInterface;
 use Knp\DoctrineBehaviors\Model\Timestampable\TimestampableTrait;
 
 #[ORM\Entity(repositoryClass: NewsletterTemplateRepository::class)]
-class NewsletterTemplate implements TimestampableInterface, Stringable
+class NewsletterTemplate implements TimestampableInterface, \Stringable
 {
     use TimestampableTrait;
     #[ORM\Id]
@@ -32,7 +31,7 @@ class NewsletterTemplate implements TimestampableInterface, Stringable
     #[ORM\OneToMany(mappedBy: 'template', targetEntity: Newsletter::class)]
     private Collection $newsletters;
 
-    #[ORM\ManyToOne(cascade: ["persist"], inversedBy: 'newsletterTemplates')]
+    #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'newsletterTemplates')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $createdBy = null;
 

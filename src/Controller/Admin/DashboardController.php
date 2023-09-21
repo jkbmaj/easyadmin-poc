@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use Iterator;
 use App\Entity\Newsletter;
 use App\Entity\NewsletterTemplate;
 use App\Entity\Recipient;
@@ -30,7 +29,7 @@ class DashboardController extends AbstractDashboardController
             ->setTitle('Communication & Marketing');
     }
 
-    public function configureMenuItems(): Iterator
+    public function configureMenuItems(): \Iterator
     {
         yield MenuItem::linkToCrud('Newslettery', 'fas fa-envelope', Newsletter::class);
         yield MenuItem::linkToCrud('Szablony newsletterów', 'fas fa-newspaper', NewsletterTemplate::class);

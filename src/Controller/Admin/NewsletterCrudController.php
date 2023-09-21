@@ -45,8 +45,8 @@ class NewsletterCrudController extends AbstractCrudController
         $sendNewsletterToYourself = Action::new('sendNewsletterToYourself', 'Wyślij tylko do siebie', 'fas fa-envelope')
             ->linkToCrudAction('sendNewsletterToYourself');
 
-        $isSent = static fn(Newsletter $entity): bool => $entity->isIsSent() === false;
-        $canEditCallback = static fn(Action $action): Action => $action->displayIf($isSent);
+        $isSent = static fn (Newsletter $entity): bool => false === $entity->isIsSent();
+        $canEditCallback = static fn (Action $action): Action => $action->displayIf($isSent);
 
         return $actions
             ->add(Crud::PAGE_DETAIL, $sendNewsletter)

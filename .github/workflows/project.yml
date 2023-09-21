@@ -11,6 +11,7 @@ jobs:
   project:
     name: Validate, check and prepare image
     runs-on: ubuntu-latest
+#    runs-on: self-hosted
 
     steps:
       - name: Install newest PHP 8.2 version
@@ -26,6 +27,34 @@ jobs:
 
       - name: Install Dependencies
         run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: PHP-CS-Fixer
+        run: ./vendor/bin/php-cs-fixer fix --diff --allow-risky=yes
+
+#      - name: Commit PHP-CS-Fixer Changes
+#        uses: stefanzweifel/git-auto-commit-action@v4
+#        with:
+#          commit_message: Fix styling changes by PHP-CS-Fixer
+
+      - name: Run PHPStan
+        uses: php-actions/phpstan@v3
+        with:
+          path: src/
+
+      - name: PHPUnit tests
+        run: ./bin/phpunit
+
+      - name: Run profiling
+        run: echo "App profiling"
+
+      - name: PhpMetrics Scan
+        uses: umutphp/phpmetrics-action@v1
+
+      - name: Upload HTML Report
+        uses: actions/upload-artifact@v1
+        with:
+          name: PhpMetrics Report
+          path: phpmetrics.html
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2

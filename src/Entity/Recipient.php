@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use DateTimeInterface;
-use DateTimeImmutable;
 use App\Repository\RecipientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -29,10 +27,10 @@ class Recipient
     private ?string $email = null;
 
     #[ORM\Column(nullable: true)]
-    private ?DateTimeImmutable $consentAt = null;
+    private ?\DateTimeImmutable $consentAt = null;
 
     #[ORM\Column(nullable: true)]
-    private ?DateTimeImmutable $verifiedAt = null;
+    private ?\DateTimeImmutable $verifiedAt = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $source = null;
@@ -47,7 +45,7 @@ class Recipient
     private ?string $token = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?DateTimeInterface $unsubscribedAt = null;
+    private ?\DateTimeInterface $unsubscribedAt = null;
 
     #[ORM\OneToMany(mappedBy: 'recipient', targetEntity: MessageSent::class)]
     private Collection $messageSents;
@@ -86,25 +84,25 @@ class Recipient
         return $this;
     }
 
-    public function getConsentAt(): ?DateTimeImmutable
+    public function getConsentAt(): ?\DateTimeImmutable
     {
         return $this->consentAt;
     }
 
-    public function setConsentAt(DateTimeImmutable $consentAt): static
+    public function setConsentAt(\DateTimeImmutable $consentAt): static
     {
         $this->consentAt = $consentAt;
 
         return $this;
     }
 
-    public function getVerifiedAt(): ?DateTimeImmutable
+    public function getVerifiedAt(): ?\DateTimeImmutable
     {
         return $this->verifiedAt;
     }
 
-/** @internal */
-    public function setVerifiedAt(?DateTimeImmutable $verifiedAt): void
+    /** @internal */
+    public function setVerifiedAt(?\DateTimeImmutable $verifiedAt): void
     {
         $this->verifiedAt = $verifiedAt;
     }
@@ -153,7 +151,7 @@ class Recipient
     public function generateToken(): static
     {
         $this->token = sha1(
-            date('Ymd') . $this->email . random_int(1, 100000)
+            date('Ymd').$this->email.random_int(1, 100000)
         );
 
         return $this;
@@ -161,17 +159,17 @@ class Recipient
 
     public function confirm(): static
     {
-        $this->verifiedAt = new DateTimeImmutable();
+        $this->verifiedAt = new \DateTimeImmutable();
 
         return $this;
     }
 
-    public function getUnsubscribedAt(): ?DateTimeInterface
+    public function getUnsubscribedAt(): ?\DateTimeInterface
     {
         return $this->unsubscribedAt;
     }
 
-    public function setUnsubscribedAt(?DateTimeInterface $unsubscribedAt): static
+    public function setUnsubscribedAt(?\DateTimeInterface $unsubscribedAt): static
     {
         $this->unsubscribedAt = $unsubscribedAt;
 

@@ -9,7 +9,6 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20230919222758 extends AbstractMigration
 {
-
     public function up(Schema $schema): void
     {
         $this->addSql('CREATE TABLE message_sent (id INT AUTO_INCREMENT NOT NULL, newsletter_id INT NOT NULL, recipient_id INT NOT NULL, message_id VARCHAR(255) NOT NULL, created_at DATETIME DEFAULT NULL, updated_at DATETIME DEFAULT NULL, INDEX IDX_1351B17022DB1917 (newsletter_id), INDEX IDX_1351B170E92F8F78 (recipient_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');

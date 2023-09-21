@@ -8,7 +8,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-
 class NewsletterSubscriber implements EventSubscriberInterface
 {
     public function __construct(
