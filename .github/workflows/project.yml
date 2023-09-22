@@ -10,8 +10,8 @@ permissions:
 jobs:
   project:
     name: Validate, check and prepare image
-    runs-on: ubuntu-latest
-#    runs-on: self-hosted
+#    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Install newest PHP 8.2 version
