@@ -10,17 +10,25 @@ permissions:
 jobs:
   project:
     name: Validate, check and prepare image
-#    runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+#    runs-on: self-hosted
 
     steps:
+      # Install PHP 8.2 and checkout repository
+
       - name: Install newest PHP 8.2 version
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
+          extensions: mbstring, ctype, iconv, intl, pdo, pdo_mysql, iconv, json
+
+      - name: Check PHP Version
+        run: php -v
 
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      # Composer
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
@@ -28,24 +36,23 @@ jobs:
       - name: Install Dependencies
         run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-      - name: PHP-CS-Fixer
-        run: ./vendor/bin/php-cs-fixer fix --diff --allow-risky=yes
+      # Static analysis
 
-#      - name: Commit PHP-CS-Fixer Changes
-#        uses: stefanzweifel/git-auto-commit-action@v4
-#        with:
-#          commit_message: Fix styling changes by PHP-CS-Fixer
+      - name: PHP-CS-Fixer
+        run: ./vendor/bin/php-cs-fixer fix --diff --allow-risky=yes --dry-run
+
+      #      - name: Commit PHP-CS-Fixer Changes
+      #        uses: stefanzweifel/git-auto-commit-action@v4
+      #        with:
+      #          commit_message: Fix styling changes by PHP-CS-Fixer
+
+      - name: PHP Code Sniffer
+        run: ./vendor/bin/phpcs
 
       - name: Run PHPStan
         uses: php-actions/phpstan@v3
         with:
           path: src/
-
-      - name: PHPUnit tests
-        run: ./bin/phpunit
-
-      - name: Run profiling
-        run: echo "App profiling"
 
       - name: PhpMetrics Scan
         uses: umutphp/phpmetrics-action@v1
@@ -55,6 +62,13 @@ jobs:
         with:
           name: PhpMetrics Report
           path: phpmetrics.html
+
+      # Tests
+
+      - name: PHPUnit tests
+        run: ./bin/phpunit
+
+      # Build and upload the Docker image to AWS ECR
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
