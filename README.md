@@ -16,3 +16,13 @@ make dev
 login: admin
 password: admin
 ```
+
+# Know how
+
+## Commits without github workflows execution
+- Add a new commit with one of the following messages in the body:
+  - `[skip ci]`
+  - `[ci skip]`
+  - `[no ci]`
+  - `[skip actions]`
+  - `[actions skip]`
