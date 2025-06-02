@@ -12,7 +12,7 @@ class NewsletterTemplateSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private readonly Security $security,
-        private readonly EntityManagerInterface $entityManager
+        private readonly EntityManagerInterface $entityManager,
     ) {
     }
 

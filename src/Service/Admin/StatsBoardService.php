@@ -9,7 +9,7 @@ class StatsBoardService
 {
     public function __construct(
         private readonly RecipientRepository $recipientRepository,
-        private readonly MessageSentRepository $messageSentRepository
+        private readonly MessageSentRepository $messageSentRepository,
     ) {
     }
 
