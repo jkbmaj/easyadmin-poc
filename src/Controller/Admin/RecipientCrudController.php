@@ -16,6 +16,7 @@ class RecipientCrudController extends AbstractCrudController
         return Recipient::class;
     }
 
+    #[\Override]
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -43,6 +44,7 @@ class RecipientCrudController extends AbstractCrudController
         ];
     }
 
+    #[\Override]
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -54,6 +56,7 @@ class RecipientCrudController extends AbstractCrudController
             ]);
     }
 
+    #[\Override]
     public function configureFilters(Filters $filters): Filters
     {
         return $filters

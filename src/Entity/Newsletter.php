@@ -128,11 +128,9 @@ class Newsletter implements TimestampableInterface
 
     public function removeMessageSent(MessageSent $messageSent): static
     {
-        if ($this->messageSents->removeElement($messageSent)) {
-            // set the owning side to null (unless already changed)
-            if ($messageSent->getNewsletter() === $this) {
-                $messageSent->setNewsletter(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->messageSents->removeElement($messageSent) && $messageSent->getNewsletter() === $this) {
+            $messageSent->setNewsletter(null);
         }
 
         return $this;

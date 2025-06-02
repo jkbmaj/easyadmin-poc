@@ -24,6 +24,7 @@ class NewsletterCrudController extends AbstractCrudController
         return Newsletter::class;
     }
 
+    #[\Override]
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -37,6 +38,7 @@ class NewsletterCrudController extends AbstractCrudController
         ];
     }
 
+    #[\Override]
     public function configureActions(Actions $actions): Actions
     {
         $sendNewsletter = Action::new('sendNewsletter', 'Wyślij do subskrybentów', 'fas fa-envelope')

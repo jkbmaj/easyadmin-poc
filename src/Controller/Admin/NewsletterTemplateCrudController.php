@@ -19,6 +19,7 @@ class NewsletterTemplateCrudController extends AbstractCrudController
         return NewsletterTemplate::class;
     }
 
+    #[\Override]
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -43,6 +44,7 @@ class NewsletterTemplateCrudController extends AbstractCrudController
         ];
     }
 
+    #[\Override]
     public function configureActions(Actions $actions): Actions
     {
         $sendTemplate = Action::new('sendTemplate', 'Send', 'fas fa-envelope')
@@ -53,6 +55,7 @@ class NewsletterTemplateCrudController extends AbstractCrudController
             ->add(Crud::PAGE_DETAIL, $sendTemplate);
     }
 
+    #[\Override]
     public function configureCrud(Crud $crud): Crud
     {
         return $crud

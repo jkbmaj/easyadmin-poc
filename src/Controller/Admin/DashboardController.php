@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Newsletter;
 use App\Entity\NewsletterTemplate;
 use App\Entity\Recipient;
@@ -10,11 +11,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
     #[Route('/admin', name: 'app_admin_index')]
+    #[\Override]
     public function index(): Response
     {
         $routeBuilder = $this->container->get(AdminUrlGenerator::class);
@@ -23,12 +24,14 @@ class DashboardController extends AbstractDashboardController
         return $this->redirect($url);
     }
 
+    #[\Override]
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
             ->setTitle('Communication & Marketing');
     }
 
+    #[\Override]
     public function configureMenuItems(): \Iterator
     {
         yield MenuItem::linkToCrud('Newslettery', 'fas fa-envelope', Newsletter::class);

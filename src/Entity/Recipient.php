@@ -196,11 +196,9 @@ class Recipient
 
     public function removeMessageSent(MessageSent $messageSent): static
     {
-        if ($this->messageSents->removeElement($messageSent)) {
-            // set the owning side to null (unless already changed)
-            if ($messageSent->getRecipient() === $this) {
-                $messageSent->setRecipient(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->messageSents->removeElement($messageSent) && $messageSent->getRecipient() === $this) {
+            $messageSent->setRecipient(null);
         }
 
         return $this;

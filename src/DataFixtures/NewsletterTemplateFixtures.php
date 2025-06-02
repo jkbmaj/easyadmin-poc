@@ -10,7 +10,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class NewsletterTemplateFixtures extends Fixture implements DependentFixtureInterface
 {
-    private const TEMPLATE_CONTENT = <<<EOT
+    private const string TEMPLATE_CONTENT = <<<EOT
 <!DOCTYPE html>
 <html lang="en">
 <head>
