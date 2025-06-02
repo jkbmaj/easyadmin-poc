@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\NewsletterTemplateRepository;
@@ -9,11 +11,13 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TimestampableInterface;
 use Knp\DoctrineBehaviors\Model\Timestampable\TimestampableTrait;
+use Stringable;
 
 #[ORM\Entity(repositoryClass: NewsletterTemplateRepository::class)]
-class NewsletterTemplate implements TimestampableInterface, \Stringable
+class NewsletterTemplate implements TimestampableInterface, Stringable
 {
     use TimestampableTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

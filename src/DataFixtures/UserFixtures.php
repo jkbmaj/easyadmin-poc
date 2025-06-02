@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\User;
@@ -24,6 +26,6 @@ class UserFixtures extends Fixture
 
         $manager->flush();
 
-        $this->addReference(self::class.'admin', $user);
+        $this->addReference(self::class . 'admin', $user);
     }
 }

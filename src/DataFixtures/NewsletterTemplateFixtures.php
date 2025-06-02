@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\NewsletterTemplate;
@@ -10,7 +12,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class NewsletterTemplateFixtures extends Fixture implements DependentFixtureInterface
 {
-    private const string TEMPLATE_CONTENT = <<<EOT
+    private const string TEMPLATE_CONTENT = <<<'EOT'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +31,7 @@ EOT;
             ->setTitle('Example of active temaplate')
             ->setContent(self::TEMPLATE_CONTENT)
             ->setIsActive(true)
-            ->setCreatedBy($this->getReference(UserFixtures::class.'admin', User::class));
+            ->setCreatedBy($this->getReference(UserFixtures::class . 'admin', User::class));
 
         $manager->persist($newsletterTemplate);
 

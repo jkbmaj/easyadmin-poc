@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Newsletter;
@@ -9,10 +11,10 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<Newsletter>
  *
- * @method Newsletter|null find($id, $lockMode = null, $lockVersion = null)
- * @method Newsletter|null findOneBy(array $criteria, array $orderBy = null)
- * @method Newsletter[]    findAll()
- * @method Newsletter[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method null|Newsletter find($id, $lockMode = null, $lockVersion = null)
+ * @method null|Newsletter findOneBy(array $criteria, array $orderBy = null)
+ * @method Newsletter[] findAll()
+ * @method Newsletter[] findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class NewsletterRepository extends ServiceEntityRepository
 {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use App\Entity\Newsletter;
@@ -11,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+use Override;
 use Symfony\Component\HttpFoundation\Response;
 
 class NewsletterCrudController extends AbstractCrudController
@@ -24,7 +27,7 @@ class NewsletterCrudController extends AbstractCrudController
         return Newsletter::class;
     }
 
-    #[\Override]
+    #[Override]
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -38,7 +41,7 @@ class NewsletterCrudController extends AbstractCrudController
         ];
     }
 
-    #[\Override]
+    #[Override]
     public function configureActions(Actions $actions): Actions
     {
         $sendNewsletter = Action::new('sendNewsletter', 'Wyślij do subskrybentów', 'fas fa-envelope')
@@ -47,8 +50,8 @@ class NewsletterCrudController extends AbstractCrudController
         $sendNewsletterToYourself = Action::new('sendNewsletterToYourself', 'Wyślij tylko do siebie', 'fas fa-envelope')
             ->linkToCrudAction('sendNewsletterToYourself');
 
-        $isSent = static fn (Newsletter $entity): bool => false === $entity->isIsSent();
-        $canEditCallback = static fn (Action $action): Action => $action->displayIf($isSent);
+        $isSent = static fn(Newsletter $entity): bool => false === $entity->isIsSent();
+        $canEditCallback = static fn(Action $action): Action => $action->displayIf($isSent);
 
         return $actions
             ->add(Crud::PAGE_DETAIL, $sendNewsletter)

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use App\Entity\NewsletterTemplate;
@@ -10,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Override;
 use Symfony\Component\HttpFoundation\Response;
 
 class NewsletterTemplateCrudController extends AbstractCrudController
@@ -19,7 +22,7 @@ class NewsletterTemplateCrudController extends AbstractCrudController
         return NewsletterTemplate::class;
     }
 
-    #[\Override]
+    #[Override]
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -44,7 +47,7 @@ class NewsletterTemplateCrudController extends AbstractCrudController
         ];
     }
 
-    #[\Override]
+    #[Override]
     public function configureActions(Actions $actions): Actions
     {
         $sendTemplate = Action::new('sendTemplate', 'Send', 'fas fa-envelope')
@@ -55,7 +58,7 @@ class NewsletterTemplateCrudController extends AbstractCrudController
             ->add(Crud::PAGE_DETAIL, $sendTemplate);
     }
 
-    #[\Override]
+    #[Override]
     public function configureCrud(Crud $crud): Crud
     {
         return $crud

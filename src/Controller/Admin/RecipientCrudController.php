@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use App\Entity\Recipient;
@@ -8,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
+use Override;
 
 class RecipientCrudController extends AbstractCrudController
 {
@@ -16,7 +19,7 @@ class RecipientCrudController extends AbstractCrudController
         return Recipient::class;
     }
 
-    #[\Override]
+    #[Override]
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -44,7 +47,7 @@ class RecipientCrudController extends AbstractCrudController
         ];
     }
 
-    #[\Override]
+    #[Override]
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -56,13 +59,12 @@ class RecipientCrudController extends AbstractCrudController
             ]);
     }
 
-    #[\Override]
+    #[Override]
     public function configureFilters(Filters $filters): Filters
     {
         return $filters
             ->add(TextFilter::new('email'))
             ->add(TextFilter::new('source'))
-            ->add(TextFilter::new('ip'))
-        ;
+            ->add(TextFilter::new('ip'));
     }
 }
